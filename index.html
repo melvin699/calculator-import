@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Import Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Car Import Calculator</h1>
+        
+        <div class="calculator-form">
+            <div class="form-section">
+                <h2>Car Details</h2>
+                <div class="vehicle-type-selection">
+                    <div class="radio-group">
+                        <input type="radio" id="newCar" name="carType" value="new" required>
+                        <label for="newCar">New Vehicle</label>
+                        
+                        <input type="radio" id="usedCar" name="carType" value="used" required>
+                        <label for="usedCar">Used Vehicle</label>
+                    </div>
+                </div>
+
+                <select id="carMake" onchange="updateCarModels()" required>
+                    <option value="">Select Car Make</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="honda">Honda</option>
+                    <option value="bmw">BMW</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="volkswagen">Volkswagen</option>
+                </select>
+                <select id="carModel" required>
+                    <option value="">Select Car Model</option>
+                </select>
+                <select id="carYear" required>
+                    <option value="">Select Year</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                </select>
+                <input type="number" id="carValue" placeholder="Car Value ($)" required>
+                <select id="engineSize" required>
+                    <option value="">Select Engine Size</option>
+                    <option value="1000">1000cc</option>
+                    <option value="1500">1500cc</option>
+                    <option value="2000">2000cc</option>
+                    <option value="2500">2500cc</option>
+                    <option value="3000">3000cc+</option>
+                </select>
+                <select id="fuelType" required>
+                    <option value="">Select Fuel Type</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="hybrid">Hybrid</option>
+                    <option value="electric">Electric</option>
+                </select>
+                <select id="transmission" required>
+                    <option value="">Select Transmission</option>
+                    <option value="manual">Manual</option>
+                    <option value="automatic">Automatic</option>
+                </select>
+            </div>
+
+            <div class="form-section">
+                <h2>Import Details</h2>
+                <select id="importLocation" required>
+                    <option value="">Select Import From</option>
+                    <option value="usa">USA</option>
+                    <option value="uk">UK</option>
+                    <option value="japan">Japan</option>
+                    <option value="dubai">Dubai</option>
+                </select>
+                <select id="destinationCountry" required>
+                    <option value="">Select Destination</option>
+                    <option value="kenya">Kenya</option>
+                    <option value="uganda">Uganda</option>
+                    <option value="tanzania">Tanzania</option>
+                </select>
+                <select id="shippingMethod" required>
+                    <option value="">Select Shipping Method</option>
+                    <option value="container20">20ft Container</option>
+                    <option value="container40">40ft Container</option>
+                    <option value="roro">Roll-on/Roll-off</option>
+                </select>
+                <div id="agentFeeSection">
+                    <select id="agentCompany" onchange="toggleCustomAgentFee()">
+                        <option value="">Select Agent/Company</option>
+                        <option value="companyA">Company A ($500)</option>
+                        <option value="companyB">Company B ($450)</option>
+                        <option value="companyC">Company C ($550)</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                    <input type="number" id="customAgentFee" placeholder="Custom Agent Fee ($)" style="display: none;">
+                </div>
+            </div>
+
+            <button onclick="calculateImport()">Calculate Import Cost</button>
+
+            <div class="results" id="results">
+                <h2>Cost Breakdown</h2>
+                <div class="result-item">
+                    <span>CIF Value:</span>
+                    <span id="cifValue">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Import Duty:</span>
+                    <span id="importDuty">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>VAT:</span>
+                    <span id="vat">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Excise Duty:</span>
+                    <span id="exciseDuty">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Shipping Cost:</span>
+                    <span id="shippingCost">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Agent Fee:</span>
+                    <span id="agentFee">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Additional Costs:</span>
+                    <span id="additionalCosts">$0</span>
+                </div>
+                <div class="result-item total">
+                    <span>Total Import Cost:</span>
+                    <span id="totalCost">$0</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-container">
+            <h2>Calculation History</h2>
+            <div id="history-list"></div>
+            <div class="history-buttons">
+                <button onclick="clearHistory()">Clear History</button>
+                <button onclick="exportToCSV()">Export to CSV</button>
+            </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
